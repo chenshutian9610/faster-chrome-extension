@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>snippet</title>
+    <script src="../js/jquery.min.js"></script>
+</head>
+<body><br><br><br><br>
+    <div style="text-align:center">
+        <p>请在下面文本框输入你要分享的链接或文本</p>
+        <textarea id='snippet' rows='20' cols='40'></textarea><br><br>
+        <button onclick="reset()">重置</button>&emsp;&emsp;
+        <button onclick="setSnippet()">分享</button>&emsp;&emsp;
+        <button onclick="getSnippet()">获取分享</button>
+    </div>
+</body>
+
+<script>
+    document.getElementById('snippet').focus()
+
+    function reset() {
+        $('#snippet').val('')
+    }
+
+    function setSnippet() {
+        $.ajax({
+            url: '/setSnippet',
+            data: {'snippet': $('#snippet').val()},
+            success: res => {
+                if (res.success) {
+                    alert('success')
+                } else {
+                    alert('fail')
+                }
+            },
+            error: res => {
+                alert('timeout')
+            }
+        })
+    }
+
+    function getSnippet() {
+        $.ajax({
+            url: '/getSnippet',
+            success: data => {
+                $('#snippet').val(data)
+            },
+            error: res => {
+                alert('timeout')
+            }
+        })
+    }
+</script>
+
+</html>
