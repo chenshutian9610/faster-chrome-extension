@@ -12,7 +12,7 @@ function getIp() {
             ipList.push(ip)
         }
     }
-    return ipList
+    return ipList.sort()
 }
 
 function processCROS(res) {
